@@ -3,7 +3,7 @@ from sqlalchemy.orm import (scoped_session, sessionmaker, relationship)
 from sqlalchemy.ext.declarative import declarative_base
 
 engine = create_engine('sqlite:///atividades.db')
-db_session = scoped_session(sessionmaker(autocmmit=False,
+db_session = scoped_session(sessionmaker(autocmmit=True,
                                          bind=engine))
 
 Base = declarative_base()
@@ -22,6 +22,7 @@ class Pessoas(Base):
     def save(self):
         db_session.add(self)
         db_session.commit()
+
     def delete(self):
         db_session.delete(self)
         db_session.commit()
@@ -32,7 +33,7 @@ class Atividades(Base):
     id = Column(Integer, primary_key=True)
     nome = Column(String(80))
     pessoa_id = Column(Integer, ForeignKey('pessoas.id'))
-    pessoa = relationship(Pessoas)
+    pessoa = relationship("Pessoas")
 
     def __repr__(self):
         return '<Atividades {}>'.format((self.nome))
@@ -40,9 +41,11 @@ class Atividades(Base):
     def save(self):
         db_session.add(self)
         db_session.commit()
+
     def delete(self):
         db_session.delete(self)
         db_session.commit()
+
 
 def init_db():
     Base.metadata.create_all(bind=engine)

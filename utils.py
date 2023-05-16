@@ -7,12 +7,14 @@ def insere_pessoas():
     print(pessoa)
     pessoa.save()
 
-# Realiza consulta na tbela pessoa
+
+# Realiza consulta na tabela pessoa
 def consulta_pessoas():
     pessoas = Pessoas.query.all()
-    # pessoa = Pessoas.query.filter_by(nome='Bruno').first()
-    # print(pessoa.idade)
+    pessoa = Pessoas.query.filter_by(nome='Bruno').first()
+    print(pessoa.idade)
     print(pessoas)
+
 
 # Altera dados na tabela pessoa
 def altera_pessoa():
@@ -20,9 +22,10 @@ def altera_pessoa():
     pessoa.idade = 21
     pessoa.save()
 
+
 # Exclui dados na tabela pessoa
 def excluir_pessoa():
-    pessoa = Pessoas.query.filter_by(nome='Jacque').firts()
+    pessoa = Pessoas.query.filter_by(nome='Bruno').first()
     pessoa.delete()
 
 
